@@ -48,3 +48,4 @@ htmlcov/
 output*.csv
 result*.csv
 
+.env
