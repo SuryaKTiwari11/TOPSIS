@@ -2,7 +2,7 @@
 
 TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) command-line package by **SURYA KANT TIWARI** (Roll 102303737).
 
-**Repository**: https://github.com/SuryaKTiwari11/topsis-surya-102303737
+**Repository**: https://github.com/SuryaKTiwari11/TOPSIS
 
 ## Installation
 
@@ -15,8 +15,8 @@ pip install Topsis-SURYA-102303737
 ### Local development
 
 ```bash
-git clone https://github.com/SuryaKTiwari11/topsis-surya-102303737.git
-cd topsis-surya-102303737
+git clone https://github.com/SuryaKTiwari11/TOPSIS.git
+cd TOPSIS
 pip install -e .
 ```
 

@@ -7,7 +7,7 @@ name = "Topsis-SURYA-102303737"
 version = "0.1.0"
 description = "TOPSIS CLI implementation by SURYA KANT TIWARI (102303737)"
 readme = "README.md"
-authors = [{name = "SURYA KANT TIWARI", email = "suryaktiwari11@users.noreply.github.com"}]
+authors = [{name = "SURYA KANT TIWARI", email = "stiwari2_be23@thapar.edu"}]
 license = {text = "MIT"}
 requires-python = ">=3.9"
 classifiers = [
@@ -21,6 +21,6 @@ dependencies = ["numpy>=1.24", "pandas>=2.0"]
 topsis-cli = "topsis_surya.core:cli"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = [""]
 include = ["topsis_surya*"]
 

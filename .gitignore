@@ -47,3 +47,4 @@ htmlcov/
 !example*.csv
 output*.csv
 result*.csv
+
