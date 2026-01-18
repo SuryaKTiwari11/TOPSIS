@@ -22,8 +22,15 @@ export default function Home() {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [sendingEmail, setSendingEmail] = useState<boolean>(false);
+  const [toast, setToast] = useState<{message: string, type: 'success' | 'error'} | null>(null);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const showToast = (message: string, type: 'success' | 'error') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 4000); // Auto hide after 4 seconds
+  };
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -122,6 +129,9 @@ export default function Home() {
       setResult(topsisResult);
 
       // Send email with results
+      setSendingEmail(true);
+      showToast('Sending results to your email...', 'success');
+      
       try {
         const emailResponse = await fetch('/api/send-email', {
           method: 'POST',
@@ -138,12 +148,17 @@ export default function Home() {
         const emailResult = await emailResponse.json();
         if (emailResult.success) {
           setSuccess(`✓ Results sent to ${email}!`);
+          showToast(`📧 Email sent successfully to ${email}!`, 'success');
         } else {
           setError('Email sending failed, but results are available below');
+          showToast('❌ Email sending failed', 'error');
         }
       } catch (emailError) {
         console.error('Email sending failed:', emailError);
-        // Don't fail the whole operation if email fails
+        setError('Email sending failed, but results are available below');
+        showToast('❌ Email sending failed', 'error');
+      } finally {
+        setSendingEmail(false);
       }
       
     } catch (err) {
@@ -289,7 +304,7 @@ export default function Home() {
 
         <button
           onClick={handleSubmit}
-          disabled={loading || csvData.length === 0}
+          disabled={loading || sendingEmail || csvData.length === 0}
           className="submit-button"
         >
           {loading ? (
@@ -297,11 +312,23 @@ export default function Home() {
               <div className="spinner"></div>
               Processing...
             </div>
+          ) : sendingEmail ? (
+            <div className="loading">
+              <div className="spinner"></div>
+              Sending Email...
+            </div>
           ) : (
             'RUN TOPSIS'
           )}
         </button>
       </div>
+
+      {/* Toast Notification */}
+      {toast && (
+        <div className={`toast ${toast.type}`}>
+          {toast.message}
+        </div>
+      )}
 
       {result && (
         <div className="results-table">

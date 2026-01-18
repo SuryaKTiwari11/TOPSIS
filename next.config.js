@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    serverActions: {
-      allowedOrigins: ["localhost:3000"],
-    },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push("nodemailer");
+    }
+    return config;
   },
-  output: "standalone",
 };
 
 module.exports = nextConfig;
