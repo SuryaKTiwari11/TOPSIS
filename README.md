@@ -4,6 +4,16 @@ TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) command-
 
 **Repository**: https://github.com/SuryaKTiwari11/TOPSIS
 
+## Images
+
+### Weighted Matrix
+
+![Weighted Matrix](images/wieghted_matrix.jpeg)
+
+### Code Example
+
+![Code Example](images/image.png)
+
 ## Installation
 
 ### From PyPI (after publishing)
